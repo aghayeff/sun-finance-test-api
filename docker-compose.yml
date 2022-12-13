@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile
+    container_name: sun-finance-api
+    ports:
+      - ${DOCKER_WEB_SERVER:-9903}:80
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html
+
+  postgres:
+    image: postgres:14-alpine
+    container_name: postgres
+    restart: unless-stopped
+    tty: true
+    ports:
+      - ${POSTGRES_PORT:-54320}:5432
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-sun_finance}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-sun_finance}
+      - TZ=Asia/Baku
+    env_file:
+      - docker/.env
+
+#  rabbitmq:
+#    image: rabbitmq:3-management
+#    container_name: rabbitmq
+#    hostname: localhost
+#    volumes:
+#      - rmqconf:/etc/rabbitmq
+#      - rmqdata:/var/lib/rabbitmq/mnesia
+#      - rmqlogs:/var/log/rabbitmq
+#    environment:
+#      RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE:-123456789}
+#      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-guest}
+#      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-guest}
+#    ports:
+#      - "${CUSTOM_RABBIT_MANAGER_PORT:-15672}:15672"
+#      - "${CUSTOM_RABBIT_PORT:-5672}:5672"
+#    env_file:
+#      - docker/.env
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    ports:
+      - ${CUSTOM_UI_PORT:-8025}:8025
+      - ${CUSTOM_SMTP_PORT:-1025}:1025
+    env_file:
+      - docker/.env
+
+#volumes:
+#  rmqconf:
+#    driver: local
+#  rmqlogs:
+#    driver: local
+#  rmqdata:
+#    driver: local
