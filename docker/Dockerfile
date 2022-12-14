@@ -20,11 +20,17 @@ RUN docker-php-ext-configure intl \
 RUN apt-get install -y libpq-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo pdo_pgsql pgsql
+
     # Support XML data format
 RUN docker-php-ext-install xml
 
     # Support (un-)packing files using/via PHP
 RUN docker-php-ext-install zip
+
+    ## PHP AMQP
+RUN apt-get install -y librabbitmq-dev libssl-dev
+RUN pecl install amqp
+RUN docker-php-ext-enable amqp
 
     # Copy and enable site config
 COPY docker/apache/100-site.conf /etc/apache2/sites-enabled/000-default.conf

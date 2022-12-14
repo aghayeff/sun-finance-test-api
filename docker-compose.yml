@@ -26,23 +26,19 @@ services:
     env_file:
       - docker/.env
 
-#  rabbitmq:
-#    image: rabbitmq:3-management
-#    container_name: rabbitmq
-#    hostname: localhost
-#    volumes:
-#      - rmqconf:/etc/rabbitmq
-#      - rmqdata:/var/lib/rabbitmq/mnesia
-#      - rmqlogs:/var/log/rabbitmq
-#    environment:
-#      RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE:-123456789}
-#      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-guest}
-#      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-guest}
-#    ports:
-#      - "${CUSTOM_RABBIT_MANAGER_PORT:-15672}:15672"
-#      - "${CUSTOM_RABBIT_PORT:-5672}:5672"
-#    env_file:
-#      - docker/.env
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    environment:
+      RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE:-123456789}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-guest}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-guest}
+    ports:
+      - "5672:5672"
+      - "15672:15672"
 
   mailhog:
     image: mailhog/mailhog
@@ -53,10 +49,6 @@ services:
     env_file:
       - docker/.env
 
-#volumes:
-#  rmqconf:
-#    driver: local
-#  rmqlogs:
-#    driver: local
-#  rmqdata:
-#    driver: local
+networks:
+  rabbitmq_go_net:
+    driver: bridge
