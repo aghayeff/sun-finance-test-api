@@ -57,7 +57,10 @@ class NotificationController extends AbstractController
         $client = $this->clientService->find($notification->getClientId());
 
         if (!$client) {
-            return $this->json(['msg' => 'No client found for id '.$notification->getClientId()], Response::HTTP_NOT_FOUND);
+            return $this->json(
+                ['msg' => 'No client found for id '.$notification->getClientId()],
+                Response::HTTP_NOT_FOUND
+            );
         }
 
         $notification->setClient($client);

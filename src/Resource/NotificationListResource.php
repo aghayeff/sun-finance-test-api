@@ -13,6 +13,7 @@ class NotificationListResource extends JsonResource
             'client' => $clientResource->setWithBody(false)->make(),
             'channel' => $this->resource->getChannel(),
             'content' => $this->resource->getContent(),
+            'status' => $this->resource->getStatus(),
         ];
     }
 }

@@ -9,6 +9,7 @@ class NotificationResource extends JsonResource
         return [
             'channel' => $this->resource->getChannel(),
             'content' => $this->resource->getContent(),
+            'status' => $this->resource->getStatus(),
         ];
     }
 }
