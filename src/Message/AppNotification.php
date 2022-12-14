@@ -6,15 +6,13 @@ use App\Entity\Notification;
 
 final class AppNotification
 {
-     private Notification $notification;
-
-     public function __construct(Notification $notification)
-     {
-         $this->notification = $notification;
+     public function __construct(
+         private readonly int $notificationId
+     ){
      }
 
-    public function getNotification(): Notification
+    public function getNotificationId(): int
     {
-        return $this->notification;
+        return $this->notificationId;
     }
 }

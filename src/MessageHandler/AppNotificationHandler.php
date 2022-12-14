@@ -24,7 +24,7 @@ final class AppNotificationHandler
 
     public function __invoke(AppNotification $message): void
     {
-        $this->notification = $message->getNotification();
+        $this->notification = $this->notificationRepository->find($message->getNotificationId());
 
         $this->handle();
     }

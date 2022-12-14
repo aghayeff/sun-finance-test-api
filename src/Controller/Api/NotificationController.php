@@ -66,7 +66,7 @@ class NotificationController extends AbstractController
         $notification->setClient($client);
         $this->notificationService->save($notification, true);
 
-        $bus->dispatch(new AppNotification($notification));
+        $bus->dispatch(new AppNotification($notification->getId()));
 
         return $this->json(['msg' => 'Notification is scheduled to be sent'], Response::HTTP_CREATED);
     }
