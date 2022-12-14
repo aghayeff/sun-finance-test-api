@@ -19,7 +19,7 @@ class ClientController extends AbstractController
 
     }
 
-    #[Route('/api/clients', methods: 'GET')]
+    #[Route('/api/private/clients', methods: 'GET')]
     public function index(Request $request): Response
     {
         $data = $this->clientService->paginate($request);
@@ -29,7 +29,7 @@ class ClientController extends AbstractController
         return $this->json($resource->collection());
     }
 
-    #[Route('/api/client/{id}', methods: 'GET')]
+    #[Route('/api/clients/{id}', methods: 'GET')]
     public function show(int $id): Response
     {
         $data = $this->clientService->find($id);
@@ -39,7 +39,7 @@ class ClientController extends AbstractController
         return $this->json($resource->make());
     }
 
-    #[Route('/api/client', methods: 'POST')]
+    #[Route('/api/clients', methods: 'POST')]
     public function store(Request $request, ValidatorInterface $validator): Response
     {
         $client = $this->clientService->fill($request);
@@ -55,7 +55,7 @@ class ClientController extends AbstractController
         return $this->json(['msg' => 'Client created'], Response::HTTP_CREATED);
     }
 
-    #[Route('/api/client/{id}', methods: 'POST')]
+    #[Route('/api/clients/{id}', methods: 'POST')]
     public function update(Request $request, ValidatorInterface $validator, int $id): Response
     {
         $client = $this->clientService->find($id);
@@ -79,7 +79,7 @@ class ClientController extends AbstractController
         return $this->json(['msg' => 'Client updated'], Response::HTTP_CREATED);
     }
 
-    #[Route('/api/client/{id}', methods: 'DELETE')]
+    #[Route('/api/clients/{id}', methods: 'DELETE')]
     public function delete(int $id): Response
     {
         $client = $this->clientService->find($id);

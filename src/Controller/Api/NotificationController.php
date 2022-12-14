@@ -12,7 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Notifier\Notification\Notification;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 class NotificationController extends AbstractController
@@ -34,7 +33,7 @@ class NotificationController extends AbstractController
         return $this->json($resource->collection());
     }
 
-    #[Route('/api/notification/{id}', methods: 'GET')]
+    #[Route('/api/notifications/{id}', methods: 'GET')]
     public function show(int $id): Response
     {
         $data = $this->notificationService->find($id);
@@ -44,7 +43,7 @@ class NotificationController extends AbstractController
         return $this->json($resource->make());
     }
 
-    #[Route('/api/notification', methods: 'POST')]
+    #[Route('/api/notifications', methods: 'POST')]
     public function store(Request $request, ValidatorInterface $validator, MessageBusInterface $bus): Response
     {
         $notification = $this->notificationService->fill($request);
