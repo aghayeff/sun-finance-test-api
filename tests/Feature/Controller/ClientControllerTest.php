@@ -60,7 +60,7 @@ class ClientControllerTest extends WebTestCase
     {
         $data = $this->clientRepository->findOneBy([]);
 
-        $this->client->request('POST', '/api/clients/' . $data->getId(), [
+        $this->client->request('PUT', '/api/clients/' . $data->getId(), [
             'firstName' => $this->faker->firstName,
             'lastName' => $this->faker->lastName,
             'email' => $this->faker->email,
