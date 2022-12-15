@@ -15,4 +15,6 @@ docker-compose exec api php bin/console doctrine:schema:update --force --env=tes
 
 bash rebuild.sh
 
+docker-compose exec api php bin/console lexik:jwt:generate-keypair
+
 popd
