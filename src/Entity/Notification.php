@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Config\NotificationChannel;
 use App\Mapping\BaseEntity;
 use App\Repository\NotificationRepository;
 use App\Validator\ChannelFormat;
@@ -103,5 +104,15 @@ class Notification extends BaseEntity
         $metadata->addPropertyConstraint('clientId', new Assert\NotBlank());
         $metadata->addPropertyConstraint('channel', new ChannelFormat('string'));
         $metadata->addPropertyConstraint('content',  new NotificationContentFormat('string'));
+    }
+
+    public static function fillFakeData($faker, Client $client): Notification
+    {
+        $notification = new Notification();
+        $notification->setChannel($faker->randomElement(NotificationChannel::values()));
+        $notification->setContent($faker->realText());
+        $notification->setClient($client);
+
+        return $notification;
     }
 }

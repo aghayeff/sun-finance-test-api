@@ -10,4 +10,7 @@ docker-compose exec api composer install
 docker-compose exec api php bin/console doctrine:migrations:migrate
 docker-compose exec api php bin/console doctrine:fixtures:load
 
+docker-compose exec api php bin/console doctrine:migrations:migrate --env=test
+docker-compose exec api php bin/console doctrine:fixtures:load --env=test
+
 popd

@@ -146,4 +146,15 @@ class Client extends BaseEntity
 
         return $this;
     }
+
+    public static function fillFakeData($faker): Client
+    {
+        $client = new Client();
+        $client->setFirstName($faker->firstName);
+        $client->setLastName($faker->lastName);
+        $client->setEmail($faker->email);
+        $client->setPhoneNumber('+99450' . $faker->numberBetween(2000000, 9999999));
+
+        return $client;
+    }
 }

@@ -12,17 +12,10 @@ class ClientFixtures extends BaseFixtures
     public function load(ObjectManager $manager): void
     {
         for ($i = 0; $i < 20; $i++) {
-            $client = new Client();
-            $client->setFirstName($this->faker->firstName);
-            $client->setLastName($this->faker->lastName);
-            $client->setEmail($this->faker->email);
-            $client->setPhoneNumber('+99450' . $this->faker->numberBetween(2000000, 9999999));
+            $client = Client::fillFakeData($this->faker);
             $manager->persist($client);
 
-            $notification = new Notification();
-            $notification->setChannel($this->faker->randomElement(NotificationChannel::values()));
-            $notification->setContent($this->faker->realText());
-            $notification->setClient($client);
+            $notification = Notification::fillFakeData($this->faker, $client);
             $manager->persist($notification);
         }
 

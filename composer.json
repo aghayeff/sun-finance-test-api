@@ -74,7 +74,7 @@
             "@auto-scripts"
         ],
         "unit-test": [
-            "./vendor/bin/phpunit --testsuite=Unit --do-not-cache-result --log-junit ./tests/build/logs/phpunit-test-log.xml"
+            "docker-compose exec api ./vendor/bin/phpunit --testsuite=Unit --do-not-cache-result --log-junit ./tests/build/logs/phpunit-test-log.xml"
         ],
         "feature-test": [
             "docker-compose exec api ./vendor/bin/phpunit --testsuite=Feature --do-not-cache-result --log-junit ./tests/build/logs/feature-test-log.xml"
