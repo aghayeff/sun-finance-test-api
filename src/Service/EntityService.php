@@ -38,9 +38,12 @@ class EntityService
 
     public function paginate(Request $request, int $limit = 10)
     {
-        $offset = $limit * ($request->get('page', 1) - 1);
+        $page = $request->get('page', 1);
+        $perPage = $request->get('per_page', $limit);
 
-        return $this->repository->paginate($limit, $offset, $request);
+        $offset = $perPage * ($page - 1);
+
+        return $this->repository->paginate($perPage, $offset, $request);
     }
 
     public function find(int $id)
