@@ -60,5 +60,8 @@ docker-compose exec api php bin/console messenger:consume async
 - Username: `admin@example.com`
 - password: `admin`
 
+## MailHog Service
+`http://localhost:8025`
+
 ## Swagger Documentation
 http://localhost:9903/api/doc
