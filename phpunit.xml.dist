@@ -17,6 +17,7 @@
         <env name="APP_ENV" value="test" force="true" />
         <env name="APP_DEBUG" value="0" />
         <env name="TEST_BASE_URL" value="http://localhost:9903" />
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
     </php>
 
     <testsuites>
