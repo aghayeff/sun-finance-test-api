@@ -7,6 +7,7 @@ The entire setup (initialization) of this docker project can be done by running 
 ./docker/init.sh
 ```
 You can now reach the application on http://localhost:9903
+
 After the setup the database migrations will be run with fake data and the composer will be installed.
 
 ### Daily usage
